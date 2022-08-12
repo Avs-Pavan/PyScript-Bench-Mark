@@ -4,15 +4,21 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/computations.css">
-    <script type="module" src="../html/js/computations.js"></script>
+    <!-- <script type="module">
+        import { data } from '../html/js/data.js'
+    </script> -->
+    <script src="../html/js/computations.js"></script>
+
 </head>
 
 <body>
-<h1>JavaScript computation benchmark</h1>
-   <button class="button" onclick="doSort()">Merge sort million records</button>
-   <button class="button">Networking benchmark</button>
-   <button class="button">Computation benchmark</button>
-   <button class="button">Conclusion</button>
+    <h1>JavaScript computation benchmark</h1>
+    <!-- <input id="fileInput" type="file" size="50" onchange="processFiles(this.files)"> -->
+
+    <button class="button" onclick="doSort()">Merge sort million records</button>
+    <button class="button" onclick="multiply()">Multiply matrix</button>
+    <button class="button">Computation benchmark</button>
+    <button class="button">Conclusion</button>
 </body>
 
 </html>
