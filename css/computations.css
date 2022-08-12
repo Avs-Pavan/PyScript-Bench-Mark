@@ -1,0 +1,58 @@
+      #myTable {
+         border-collapse: collapse;
+         margin: 20px;
+         width: 80%;
+      }
+
+      #myTable td,
+      #myTable th {
+         border: 1px solid #ddd;
+         padding: 8px;
+      }
+
+      #myTable td {
+         color: #555;
+      }
+
+      #myTable tr:nth-child(even) {
+         background-color: #f2f2f2;
+      }
+
+      #myTable tr:hover {
+         background-color: #ddd;
+      }
+
+      #myTable th {
+         padding-top: 12px;
+         padding-bottom: 12px;
+         text-align: left;
+         background-color: #04AA6D;
+         color: white;
+      }
+
+      * {
+         box-sizing: border-box
+      }
+
+      /* Set height of body and the document to 100% */
+      body,
+      html {
+         padding: 10px;
+         height: 100%;
+         margin: 0;
+         font-family: Arial;
+      }
+
+      .button {
+         background-color: #4CAF50; /* Green */
+         border: none;
+         color: white;
+         padding: 15px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         margin: 4px 2px;
+         cursor: pointer;
+         border-radius: 12px;
+       }
