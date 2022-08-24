@@ -50,12 +50,13 @@ def clearEvenRows(*args):
     myTable = document.getElementById('myTable')
     rowCount = myTable.rows.length
     i = 1
-    while i < (rowCount):
+    while i < rowCount:
         try:
-            if i % 2 == 0:
+            id = myTable.rows[i].cells[0].innerHTML
+            if int(id) % 2 == 0:
                 myTable.deleteRow(i)
-            i =+ 1
-        except:
+            i += 1
+        except Exception as e:
             break
     end = time.time()
     console.log(end-start)
