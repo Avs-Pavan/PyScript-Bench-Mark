@@ -4,21 +4,67 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/computations.css">
-    <!-- <script type="module">
-        import { data } from '../html/js/data.js'
-    </script> -->
-    <script src="../html/js/computations.js"></script>
-    <script src="../html/js/dfs.js"></script>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
 
 <body>
-    <h1>JavaScript computation benchmark</h1>
-
-    <button class="button" onclick="doSort()">Merge sort million records</button>
-    <button class="button" onclick="multiply()">Multiply matrix</button>
-    <button class="button" onclick="searchDfs()">Depth First search</button>
-    <button class="button" onclick="hash()">Polynomial hash</button>
-    <button class="button" onclick="heapSortData()">Heap sort</button>
+    <h1>PyScript computation benchmark</h1>
+    <py-script>
+import json
+from js import console
+from pyodide.http import open_url
+# GET
+start = time.time()
+print(start)
+data = json.loads(open_url("https://raw.githubusercontent.com/kevinOcconer/million/main/million.json").read())
+def mergeSort(arr):
+    if len(arr) > 1:
+ 
+         # Finding the mid of the array
+        mid = len(arr)//2
+ 
+        # Dividing the array elements
+        L = arr[:mid]
+ 
+        # into 2 halves
+        R = arr[mid:]
+ 
+        # Sorting the first half
+        mergeSort(L)
+ 
+        # Sorting the second half
+        mergeSort(R)
+ 
+        i = j = k = 0
+ 
+        # Copy data to temp arrays L[] and R[]
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+ 
+        # Checking if any element was left
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+ 
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+print("merge sort started")
+mid = time.time()
+print(mid - start)
+mergeSort(data)
+end = time.time()
+print(end-mid)
+print("completed")             
+    </py-script>
 </body>
 
 </html>
