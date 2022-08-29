@@ -83,3 +83,6 @@ function colorLog(message, color) {
  
     console.log("%c" + message, "color:" + color);
  }
+
+ //polinomial hash and heap sort.
+ 
