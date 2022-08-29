@@ -6,19 +6,17 @@
     <link rel="stylesheet" href="../css/tablecss.css">
     <script src="../html/js/networking.js"></script>
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <!-- <py-script src="../html/py/network.py"> </py-script> -->
-    
 </head>
 
 <body>
 
     <h1>PyScript Networking benchmark</h1>
-    <button class="button" onclick="createUser()">Create (Post) request</button>
-    <button class="button" onclick="getSingleRecord()" style="background-color: blue;">Read(Get) request</button>
-    <button class="button"  onclick="updaateUser()"  style="background-color: orange;">Update(Put) request</button>
-    <button class="button" onclick="deleteUser()" style="background-color: red;">Delete(Delete) request</button>
-    <br>
-    <button class="button" id="get100_records" pys-onClick="getRecords" style="background-color: green;">Read 100 records</button>
+    <button class="button" id="create" pys-onClick="createUser">Create (Post) request</button>
+    <!-- <button class="button" id="get_single" pys-onClick="getSingleRecord" style="background-color: blue;">Read(Get) request</button>
+    <button class="button" id="update" pys-onClick="updateUser"  style="background-color: orange;">Update(Put) request</button>
+    <button class="button" id="delete" pys-onClick="deleteUser" style="background-color: red;">Delete(Delete) request</button>
+    <br> -->
+    <button class="button" id="get100_records" pys-onClick="get100Records" style="background-color: green;">Read 100 records</button>
     <br>
     <div id="request_output"></div>
 
@@ -26,8 +24,14 @@
 from pyodide.http import pyfetch
 import asyncio
 from js import console
-async def getRecords(*args):
-    console.log("fetch started")
+async def get100Records(*args):
+    start = time.time()
+    response = await pyfetch(url="https://6304dc3c94b8c58fd726ccaf.mockapi.io/users", method="GET")
+    output = f"GET request=> status:{response.status}, json:{await response.json()}"
+    end = time.time()
+    console.log(end-start)
+
+async def createUser(*args):
     start = time.time()
     response = await pyfetch(url="https://6304dc3c94b8c58fd726ccaf.mockapi.io/users", method="GET")
     output = f"GET request=> status:{response.status}, json:{await response.json()}"
