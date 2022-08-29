@@ -54,7 +54,7 @@ function multiply() {
     console.log("Matrix multiplication started")
     const start = performance.now()
     var ressult = multiplyMatrices(m1, m2)
-    // console.log(ressult)
+    console.log(ressult)
     const duration = performance.now() - start
     console.log("Time taken to perform Matrix multiplication")
     colorLog(duration, "success")
