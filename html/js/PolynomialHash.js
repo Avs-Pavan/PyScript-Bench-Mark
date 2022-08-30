@@ -87,3 +87,29 @@ export default class PolynomialHash {
     return charCode;
   }
 }
+
+
+
+
+// export default class Hash {
+//   p1 = 31;
+//   p2 = 37;
+//   m1 = 1000000007;
+//   m2 = 1000000009;
+//   // hash1 = 0;
+//   // hash2 = 0;
+//   constructor(str) {
+//     compute_hashes(str)
+//   }
+
+//   compute_hashes(str) {
+//     pow1 = 1, pow2 = 1
+//     hash1 = 0, hash2 = 0
+//     for (ch in s) {
+//       seed = 1 + ch.charCodeAt() - 'a'.charCodeAt()
+//       hash1 = (hash1 + seed * pow1) % self.m1
+//       hash2 = (hash2 + seed * pow2) % self.m2
+//       pow1 = (pow1 * self)
+//     }
+//   }
+// }
