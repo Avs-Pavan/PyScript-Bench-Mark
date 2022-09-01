@@ -5,7 +5,13 @@
 
 In this Benchark We are going to do some UI manipulation tasks using both PyScript and JavaScript and  measure the performance of both.
 
-### 1. Adding 10000 rows to table.
+List of tasks for Dom Manipulation:
+ - Adding 10k rows to a table.
+ - Updating a column of all rows. 
+ - Delete even rows of the table with 10k rows.
+ - Delete all the rows of the table with 10k rows.
+
+### 1. Adding 10k rows to table.
 
 #### Js
 
@@ -216,3 +222,295 @@ Here we are deleting all the rows in the table with 10k records.
 | `Delete all the rows of the table with 10k rows` |  387 | 484 |
 
 
+
+## 2. Networking Benchmark
+
+In this Benchark We are going to do Networking tasks using both PyScript and JavaScript and measure the performance of both. We are going to perform CRUD operations as a part of the tasks.
+
+List of tasks for Networking:
+ - Create data in server using `POST` request.
+ - Read data from server using `GET` request.
+ - Update data in server using `PUT` request. 
+ - Delete data from server using `DELETE` request.
+ - Fetch 100 records from the server.
+
+### 1. Create data in server using `POST` request.
+
+#### Js
+
+```
+function createUser() {
+    console.log("Create record started")
+    const start = performance.now()
+    let user = {
+        name: 'John',
+        surname: 'Smith'
+    };
+
+    fetch('https://6304dc3c94b8c58fd726ccaf.mockapi.io/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+    }).then(response => {
+        const duration = performance.now() - start
+        console.log("Time taken to create record")
+        colorLog(duration, "success")
+        console.log(response.json())
+    })
+    .catch(error => {
+        console.log(error)
+    });
+}
+```
+
+#### PyScript
+
+```
+import asyncio  # important!!
+import json
+from request import request
+from js import console
+
+baseurl = "https://6304dc3c94b8c58fd726ccaf.mockapi.io/users"
+
+start = time.time()
+body = json.dumps({"name":"test_title"})
+new_post = await request(baseurl, body=body, method="POST", headers=headers)
+end = time.time()
+console.log(end-start)
+```
+
+
+Here we are creating user in server using `POST` request.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)   | PyScript |
+| :------------- | :-------------: | :--------: |
+| Create data in server using `POST` request |  174 | 095 |
+
+
+### 2. Read data from server using `GET` request.
+
+#### Js
+
+```
+function getSingleRecord(){
+    console.log("Read single records started")
+    const start = performance.now()
+    fetch('https://6304dc3c94b8c58fd726ccaf.mockapi.io/users/86')
+        .then(response => {
+            const duration = performance.now() - start
+            console.log("Time taken to read single record")
+            colorLog(duration, "success")
+            console.log(response.json())
+        })
+        .catch(error => {
+            // handle the error
+            console.log(error)
+        });
+}
+```
+
+#### PyScript
+
+```
+import asyncio  # important!!
+import json
+from request import request
+from js import console
+
+baseurl = "https://6304dc3c94b8c58fd726ccaf.mockapi.io/users"
+
+start = time.time()
+headers = {"Content-type": "application/json"}
+response = await request(baseurl+"/86", method="GET", headers=headers)
+end = time.time()
+console.log(end-start)
+```
+
+
+Here we are reading single user from server using `GET` request.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)   | PyScript |
+| :------------- | :-------------: | :--------: |
+| Read data from server using `GET` request. |  83 | 153 |
+
+
+
+### 3. Update data in server using `PUT` request. 
+
+#### Js
+
+```
+function updaateUser() {
+    console.log("Update record started")
+    const start = performance.now()
+    let user = {
+        name: 'John',
+        surname: 'Smith updated'
+    };
+
+    fetch('https://6304dc3c94b8c58fd726ccaf.mockapi.io/users/86', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+    }).then(response => {
+        const duration = performance.now() - start
+        console.log("Time taken to Update record")
+        colorLog(duration, "success")
+        console.log(response.json())
+    })
+    .catch(error => {
+        console.log(error)
+    });
+}
+
+```
+
+#### PyScript
+
+```
+import asyncio  # important!!
+import json
+from request import request
+from js import console
+
+baseurl = "https://6304dc3c94b8c58fd726ccaf.mockapi.io/users"
+
+start = time.time()
+body = json.dumps({"name":"test_title"})
+new_post = await request(baseurl+"/83", body=body, method="PUT", headers=headers)
+end = time.time()
+console.log(end-start)
+```
+
+
+Here we are updating single user from server using `PUT` request.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)   | PyScript |
+| :------------- | :-------------: | :--------: |
+| Update data in server using `PUT` request.  |  131 | 160 |
+
+### 4. Delete data from server using `DELETE` request.
+
+#### Js
+
+```
+function deleteUser() {
+    console.log("Delete record started")
+    const start = performance.now()
+  
+    fetch('https://6304dc3c94b8c58fd726ccaf.mockapi.io/users/86', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    }).then(response => {
+        const duration = performance.now() - start
+        console.log("Time taken to Delete record")
+        colorLog(duration, "success")
+        console.log(response.json())
+    })
+    .catch(error => {
+        console.log(error)
+    });
+}
+```
+
+#### PyScript
+
+```
+import asyncio  # important!!
+import json
+from request import request
+from js import console
+
+baseurl = "https://6304dc3c94b8c58fd726ccaf.mockapi.io/users"
+
+start = time.time()
+new_post = await request(baseurl+"/83", method="DELETE", headers=headers)
+end = time.time()
+console.log(end-start)
+```
+
+
+Here we are deleting single user from server using `DELETE` request.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)   | PyScript |
+| :------------- | :-------------: | :--------: |
+| Delete data from server using `DELETE` request.  |  161 | 90 |
+
+
+
+
+
+### 5. Read 100 records from server using `GET` request.
+
+#### Js
+
+```
+function get100records() {
+
+    console.log("Read 100 records started")
+    const start = performance.now()
+    fetch('https://6304dc3c94b8c58fd726ccaf.mockapi.io/users')
+        .then(response => {
+            const duration = performance.now() - start
+            console.log("Time taken to read 100 records")
+            colorLog(duration, "success")
+            console.log(response.json())
+        })
+        .catch(error => {
+            // handle the error
+            console.log(error)
+        });
+}
+```
+
+#### PyScript
+
+```
+import asyncio  # important!!
+import json
+from request import request
+from js import console
+
+baseurl = "https://6304dc3c94b8c58fd726ccaf.mockapi.io/users"
+
+start = time.time()
+headers = {"Content-type": "application/json"}
+response = await request(baseurl, method="GET", headers=headers)
+end = time.time()
+console.log(end-start)
+```
+
+
+Here we are reading 100 records from server using `GET` request.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)   | PyScript |
+| :------------- | :-------------: | :--------: |
+| Read 100 records from server using `GET` request. |  103 | 150 |
+
+
+### Networking bech mark result
+
+| Bech mark     | JavaScript (Milli seconds)    | PyScript (Milli seconds) |
+| :------------- | :-------------: | :--------: |
+| Create data in server using `POST` request |  174 | 095 |
+| Read data from server using `GET` request. |  83 | 153 |
+| Update data in server using `PUT` request.  |  131 | 160 |
+| Delete data from server using `DELETE` request.  |  161 | 90 |
+| Fetch 100 records from the server.  |  103 | 150 |
