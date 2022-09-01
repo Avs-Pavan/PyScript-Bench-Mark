@@ -17,7 +17,7 @@ from pyodide.http import open_url
 # GET
 start = time.time()
 data = json.loads(open_url("https://raw.githubusercontent.com/kevinOcconer/million/main/million.json").read())
-
+<!-- 
 def mergeSort(arr):
     if len(arr) > 1:
  
@@ -63,11 +63,11 @@ mid = time.time()
 mergeSort(data)
 end = time.time()
 print(end-mid)
-print("completed")        -->
+print("completed")    -->
 
 <!-- matrix Multiplication -->
 
-m1 = [[1,2],[3,4]]
+<!-- m1 = [[1,2],[3,4]]
 m2 = [[5,6],[7,8]]
 
 result = []
@@ -83,13 +83,13 @@ for i in range(2):
       for k in range(2):
          result[i][j] += m1[i][k] * m2[k][j]
 end = time.time()
-print(end-mid)
+print(end-mid) -->
 
 <!-- DFS -->
 
  # this class represents a directed graph using adjacency list representation
  
- 
+<!--  
 class Graph:
     # Constructor
     def __init__(self):
@@ -135,7 +135,7 @@ print("DFS")
 mid = time.time()
 g.DFS()
 end = time.time()
-print(end-mid) 
+print(end-mid)  -->
 
 <!-- Polynomial hash -->
 
@@ -167,10 +167,14 @@ if __name__ == '__main__':
     s = "geeksforgeeks"
 
 print("Hash")
-mid = time.time()
+#mid = time.time()
+millisecondsStart = int(round(time.time() * 100000))
+print("start " + str(millisecondsStart))
 hash = Hash(s)
-end = time.time()
-print(end-mid)
+#end = time.time()
+millisecondsEnd = int(round(time.time() * 100000))
+print("end " + str(millisecondsEnd))
+print(millisecondsEnd-millisecondsStart)
 
 
 <!-- Heap sort -->
