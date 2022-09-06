@@ -169,14 +169,13 @@ if __name__ == '__main__':
     s = "geeksforgeeks"
 
 print("Hash")
-#mid = time.time()
-millisecondsStart = int(round(time.time() * 100000))
-print("start " + str(millisecondsStart))
-hash = Hash(s)
-#end = time.time()
-millisecondsEnd = int(round(time.time() * 100000))
-print("end " + str(millisecondsEnd))
-print(millisecondsEnd-millisecondsStart)
+mid = time.time()
+for x in range(10000):
+    hash = Hash(s)
+end = time.time()
+#millisecondsEnd = int(round(time.time() * 100000))
+print(end-mid)  
+#print(millisecondsEnd-millisecondsStart)
 
 
 <!-- Heap sort -->

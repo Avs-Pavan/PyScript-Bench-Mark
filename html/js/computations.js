@@ -88,7 +88,9 @@ function colorLog(message, color) {
 function hash() {
     const start = performance.now()
     const polynomialHash = new Hash();
-    polynomialHash.compute_hashes('geeksforgeeks')
+    for(let x = 0; x<10000; x++){
+        polynomialHash.compute_hashes('geeksforgeeks');
+    }
     const duration = performance.now() - start
     console.log("Time taken to perform polynomial hash")
     colorLog(duration, "success")

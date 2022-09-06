@@ -824,7 +824,7 @@ Here we are using heap sort to 1M records and measuring the time taken to comple
 
 
 
-### 2. Depth first search 10k times. 
+### 3. Depth first search 10k times. 
 
 #### Js
 
@@ -979,4 +979,161 @@ Here we are using heap sort to 1M records and measuring the time taken to comple
 | Bech mark     | JavaScript (Milli seconds)    | PyScript (Milli seconds) |
 | :------------- | :-------------: | :--------: |
 | `Depth first search a graph 10k times.` |  23 | 37 |
+
+
+
+
+### 4. Polynomial hash 10k times. 
+
+#### Js
+
+```
+const DEFAULT_BASE = 37;
+const DEFAULT_MODULUS = 101;
+
+export default class PolynomialHash {
+  /**
+   * @param {number} [base] - Base number that is used to create the polynomial.
+   * @param {number} [modulus] - Modulus number that keeps the hash from overflowing.
+   */
+  constructor({ base = DEFAULT_BASE, modulus = DEFAULT_MODULUS } = {}) {
+    this.base = base;
+    this.modulus = modulus;
+  }
+
+  /**
+   * Function that creates hash representation of the word.
+   *
+   * Time complexity: O(word.length).
+   *
+   * @param {string} word - String that needs to be hashed.
+   * @return {number}
+   */
+  hash(word) {
+    const charCodes = Array.from(word).map((char) => this.charToNumber(char));
+
+    let hash = 0;
+    for (let charIndex = 0; charIndex < charCodes.length; charIndex += 1) {
+      hash *= this.base;
+      hash += charCodes[charIndex];
+      hash %= this.modulus;
+    }
+
+    return hash;
+  }
+
+  /**
+   * Function that creates hash representation of the word
+   * based on previous word (shifted by one character left) hash value.
+   *
+   * Recalculates the hash representation of a word so that it isn't
+   * necessary to traverse the whole word again.
+   *
+   * Time complexity: O(1).
+   *
+   * @param {number} prevHash
+   * @param {string} prevWord
+   * @param {string} newWord
+   * @return {number}
+   */
+  roll(prevHash, prevWord, newWord) {
+    let hash = prevHash;
+
+    const prevValue = this.charToNumber(prevWord[0]);
+    const newValue = this.charToNumber(newWord[newWord.length - 1]);
+
+    let prevValueMultiplier = 1;
+    for (let i = 1; i < prevWord.length; i += 1) {
+      prevValueMultiplier *= this.base;
+      prevValueMultiplier %= this.modulus;
+    }
+
+    hash += this.modulus;
+    hash -= (prevValue * prevValueMultiplier) % this.modulus;
+
+    hash *= this.base;
+    hash += newValue;
+    hash %= this.modulus;
+
+    return hash;
+  }
+
+  /**
+   * Converts char to number.
+   *
+   * @param {string} char
+   * @return {number}
+   */
+  charToNumber(char) {
+    let charCode = char.codePointAt(0);
+
+    // Check if character has surrogate pair.
+    const surrogate = char.codePointAt(1);
+    if (surrogate !== undefined) {
+      const surrogateShift = 2 ** 16;
+      charCode += surrogate * surrogateShift;
+    }
+
+    return charCode;
+  }
+}
+
+function hash() {
+    const start = performance.now()
+    const polynomialHash = new Hash();
+    for(let x = 0; x<10000; x++){
+        polynomialHash.compute_hashes('geeksforgeeks');
+    }
+    const duration = performance.now() - start
+    console.log("Time taken to perform polynomial hash")
+    colorLog(duration, "success")
+}
+
+```
+
+#### PyScript
+
+```
+class Hash:
+    def __init__(self, s: str):
+        self.p1, self.m1 = 31, 10**9 + 7
+        self.p2, self.m2 = 37, 10**9 + 9
+        self.hash1, self.hash2 = 0, 0
+        self.compute_hashes(s)
+    def compute_hashes(self, s: str):
+        pow1, pow2 = 1, 1
+        hash1, hash2 = 0, 0
+        for ch in s:
+            seed = 1 + ord(ch) - ord('a')
+            hash1 = (hash1 + seed * pow1) % self.m1
+            hash2 = (hash2 + seed * pow2) % self.m2
+            pow1 = (pow1 * self.p1) % self.m1
+            pow2 = (pow2 * self.p2) % self.m2
+        self.hash1, self.hash2 = hash1, hash2
+
+def __eq__(self, other):
+    return self.hash1 == other.hash1 and self.hash2 == other.hash2
+
+def __str__(self):
+    return f'({self.hash1}, {self.hash2})'
+
+if __name__ == '__main__':
+    s = "geeksforgeeks"
+
+print("Hash")
+mid = time.time()
+for x in range(10000):
+    hash = Hash(s)
+end = time.time()
+print(end-mid)  
+```
+
+
+Here we are using heap sort to 1M records and measuring the time taken to complete the task.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)    | PyScript (Milli seconds) |
+| :------------- | :-------------: | :--------: |
+| `Polynomial hash 10k times.` |  54 | 223 |
 
