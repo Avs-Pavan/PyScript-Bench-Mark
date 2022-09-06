@@ -89,7 +89,8 @@ print(end-mid) -->
 
  # this class represents a directed graph using adjacency list representation
  
-<!--  
+from collections import defaultdict
+
 class Graph:
     # Constructor
     def __init__(self):
@@ -104,7 +105,7 @@ class Graph:
     def DFSUtil(self, v, visited):
         # Mark the current node as visited and print it
         visited.add(v)
-        print(v,end=" ")
+        <!-- print(v,end=" ") -->
  
         # recur for all the vertices adjacent to this vertex
         for neighbour in self.graph[v]:
@@ -133,9 +134,10 @@ g.addEdge(2, 3)
 g.addEdge(3, 3)
 print("DFS")
 mid = time.time()
-g.DFS()
+for x in range(10000):
+    g.DFS()
 end = time.time()
-print(end-mid)  -->
+print(end-mid)  
 
 <!-- Polynomial hash -->
 

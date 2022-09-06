@@ -820,3 +820,163 @@ Here we are using heap sort to 1M records and measuring the time taken to comple
 | Bech mark     | JavaScript (Milli seconds)    | PyScript (Milli seconds) |
 | :------------- | :-------------: | :--------: |
 | `Heap sort 1M records.` |  357 | 1707 |
+
+
+
+
+### 2. Depth first search 10k times. 
+
+#### Js
+
+```
+class Graph
+{
+     
+    // Constructor
+    constructor(v)
+    {
+        this.V = v;
+        this.adj = new Array(v);
+        for(let i = 0; i < v; i++)
+            this.adj[i] = [];
+    }
+     
+    // Function to add an edge into the graph
+    addEdge(v, w)
+    {
+         
+        // Add w to v's list.
+        this.adj[v].push(w);
+    }
+     
+    // A function used by DFS
+    DFSUtil(v, visited)
+    {
+         
+        // Mark the current node as visited and print it
+        visited[v] = true;
+        // console.log(v + " ");
+  
+        // Recur for all the vertices adjacent to this
+        // vertex
+        for(let i of this.adj[v].values())
+        {
+            let n = i
+            if (!visited[n])
+                this.DFSUtil(n, visited);
+        }
+    }
+     
+    // The function to do DFS traversal.
+    // It uses recursive
+    // DFSUtil()
+    DFS(v)
+    {
+         
+        // Mark all the vertices as
+        // not visited(set as
+        // false by default in java)
+        let visited = new Array(this.V);
+        for(let i = 0; i < this.V; i++)
+            visited[i] = false;
+  
+        // Call the recursive helper
+        // function to print DFS
+        // traversal
+        this.DFSUtil(v, visited);
+    }
+}
+ 
+
+
+  function searchDfs(){
+    // Driver Code
+g = new Graph(4);
+  
+g.addEdge(0, 1);
+g.addEdge(0, 2);
+g.addEdge(1, 2);
+g.addEdge(2, 0);
+g.addEdge(2, 3);
+g.addEdge(3, 3);
+   
+    //console.log(testTree.traverseBFS());
+  
+
+    console.log("Depth first search started")
+    const start = performance.now()
+    for(let x = 0; x<10000; x++){
+        g.DFS(2);
+    }
+
+    const duration = performance.now() - start
+    console.log("Time taken perform DFS" )
+    colorLog(duration,"success")
+  }
+
+```
+
+#### PyScript
+
+```
+from collections import defaultdict
+
+class Graph:
+    # Constructor
+    def __init__(self):
+        # default dictionary to store graph
+        self.graph = defaultdict(list)
+ 
+    # Function to add an edge to graph
+    def addEdge(self, u, v):
+        self.graph[u].append(v)
+    # A function used by DFS
+ 
+    def DFSUtil(self, v, visited):
+        # Mark the current node as visited and print it
+        visited.add(v)
+        <!-- print(v,end=" ") -->
+ 
+        # recur for all the vertices adjacent to this vertex
+        for neighbour in self.graph[v]:
+            if neighbour not in visited:
+                self.DFSUtil(neighbour, visited)
+        # The function to do DFS traversal. It uses recursive DFSUtil
+ 
+    def DFS(self):
+        # create a set to store all visited vertices
+        visited = set()
+        # call the recursive helper function to print DFS traversal starting from all
+        # vertices one by one
+        for vertex in self.graph:
+            if vertex not in visited:
+                self.DFSUtil(vertex, visited)
+# Driver code
+# create a graph given in the above diagram
+ 
+print("Following is Depth First Traversal \n")
+g = Graph()
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 2)
+g.addEdge(2, 0)
+g.addEdge(2, 3)
+g.addEdge(3, 3)
+print("DFS")
+mid = time.time()
+for x in range(10000):
+    g.DFS()
+end = time.time()
+print(end-mid)  
+
+```
+
+
+Here we are using heap sort to 1M records and measuring the time taken to complete the task.
+
+#### Results
+
+| Bech mark     | JavaScript (Milli seconds)    | PyScript (Milli seconds) |
+| :------------- | :-------------: | :--------: |
+| `Depth first search a graph 10k times.` |  23 | 37 |
+
