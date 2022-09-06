@@ -272,8 +272,10 @@ g.addEdge(3, 3);
 
     console.log("Depth first search started")
     const start = performance.now()
-    // console.log(testTree2.traverseDFS("in"));
-    console.log(g.DFS(2));
+    for(let x = 0; x<10000; x++){
+        g.DFS(2);
+    }
+
     const duration = performance.now() - start
     console.log("Time taken perform DFS" )
     colorLog(duration,"success")

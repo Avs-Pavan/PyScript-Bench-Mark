@@ -39,8 +39,6 @@ function createUser() {
         // handle the error
         console.log(error)
     });
-
-   
 }
 
 function getSingleRecord(){
@@ -80,7 +78,6 @@ function updaateUser() {
         console.log(response.json())
     })
     .catch(error => {
-        // handle the error
         console.log(error)
     });
 }
