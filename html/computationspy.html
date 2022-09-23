@@ -67,27 +67,29 @@ print("completed")    -->
 
 <!-- matrix Multiplication -->
 
-<!-- m1 = [[1,2],[3,4]]
-m2 = [[5,6],[7,8]]
-
+#m1 = [[1,2],[3,4]]
+#m2 = [[5,6],[7,8]]
+m1 = json.loads(open_url("https://raw.githubusercontent.com/kevinOcconer/PyScript-Bench-Mark/master/java/matrixa.json").read())
+m2 = m1
+print("length is" + str(len(m1)))
 result = []
-for i in range(2):
+for i in range(len(m2)):
    row = []
-   for j in range(2):
+   for j in range(len(m2)):
       row.append(0)
    result.append(row)
 print("Matrix Multiplication:")
 mid = time.time()
-for i in range(2):
-   for j in range(2):
-      for k in range(2):
+for i in range(len(m1)):
+   for j in range(len(m2)):
+      for k in range(len(m2)):
          result[i][j] += m1[i][k] * m2[k][j]
 end = time.time()
-print(end-mid) -->
+print(end-mid) 
 
 <!-- DFS -->
 
- # this class represents a directed graph using adjacency list representation
+ <!-- # this class represents a directed graph using adjacency list representation
  
 from collections import defaultdict
 
@@ -105,7 +107,7 @@ class Graph:
     def DFSUtil(self, v, visited):
         # Mark the current node as visited and print it
         visited.add(v)
-        <!-- print(v,end=" ") -->
+         print(v,end=" ") 
  
         # recur for all the vertices adjacent to this vertex
         for neighbour in self.graph[v]:
@@ -137,11 +139,11 @@ mid = time.time()
 for x in range(10000):
     g.DFS()
 end = time.time()
-print(end-mid)  
+print(end-mid)   -->
 
 <!-- Polynomial hash -->
 
-
+<!-- 
 class Hash:
     def __init__(self, s: str):
         self.p1, self.m1 = 31, 10**9 + 7
@@ -178,7 +180,7 @@ print(end-mid)
 #print(millisecondsEnd-millisecondsStart)
 
 
-<!-- Heap sort -->
+ Heap sort 
 
 # Python program for implementation of heap Sort
  
@@ -231,7 +233,7 @@ if __name__ == '__main__':
     hash = heapSort(data)
     end = time.time()
     print(end-mid)
-
+ -->
 
     </py-script>
 </body>

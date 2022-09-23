@@ -49,15 +49,27 @@ function multiplyMatrices(m1, m2) {
 }
 
 function multiply() {
-    var m1 = [[1, 2], [3, 4]]
-    var m2 = [[5, 6], [7, 8]]
-    console.log("Matrix multiplication started")
-    const start = performance.now()
-    var ressult = multiplyMatrices(m1, m2)
-    console.log(ressult)
-    const duration = performance.now() - start
-    console.log("Time taken to perform Matrix multiplication")
-    colorLog(duration, "success")
+    fetch('./js/million.json')
+        .then(res => res.json())
+        .then(data => {
+            console.log("Matrix multiplication started")
+            console.log("length is "+data.length)
+            const start = performance.now()
+            var ressult = multiplyMatrices(data, data)
+            // console.log(ressult)
+            const duration = performance.now() - start
+            console.log("Time taken to perform Matrix multiplication")
+            colorLog(duration, "success")
+        })
+    // var m1 = [[1, 2], [3, 4]]
+    // var m2 = [[5, 6], [7, 8]]
+    // console.log("Matrix multiplication started")
+    // const start = performance.now()
+    // var ressult = multiplyMatrices(m1, m2)
+    // console.log(ressult)
+    // const duration = performance.now() - start
+    // console.log("Time taken to perform Matrix multiplication")
+    // colorLog(duration, "success")
 }
 
 

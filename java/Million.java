@@ -4,9 +4,9 @@ public class Million{
 
     public static void main(String args[] ){
         System.out.println("[");
-        for(int x = 0;x<1000000;x++){
+        for(int x = 0;x<5000000;x++){
             System.out.print(genrateRandomNumber());
-            if(x<(1000000-1))
+            if(x<(5000000-1))
             System.out.println(",");
             else
             System.out.println("");
